@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hari Raya Open House</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F4EFE4;
+      --cream-dark: #EAE2D0;
+      --navy: #1B2A4A;
+      --navy-light: #2C3E6B;
+      --gold: #B8842A;
+      --gold-light: #D4A853;
+      --blue-soft: #7A9BBF;
+      --text-dark: #2E2620;
+      --text-mid: #6B5E4E;
+      --text-muted: #9C8A6E;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text-dark);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 40px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(184,132,42,0.06) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(122,155,191,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 0.5px solid var(--gold-light);
+      padding: 6px 20px;
+      border-radius: 40px;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 14vw, 90px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--navy);
+      line-height: 0.95;
+      letter-spacing: -1px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.4s forwards;
+    }
+
+    .hero-sub {
+      font-size: clamp(9px, 2.5vw, 11px);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.6s forwards;
+    }
+
+    .divider {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      margin: 28px auto;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.7s forwards;
+    }
+
+    .hero-details {
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.85s forwards;
+    }
+
+    .hero-details p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 4vw, 20px);
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+
+    .hero-details .date {
+      font-size: clamp(18px, 4.5vw, 22px);
+      color: var(--navy);
+      font-weight: 500;
+    }
+
+    .rsvp-btn {
+      display: inline-block;
+      margin-top: 36px;
+      padding: 14px 40px;
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 40px;
+      transition: background 0.3s, transform 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 1s forwards;
+    }
+
+    .rsvp-btn:hover { background: var(--navy-light); transform: translateY(-2px); }
+    .rsvp-btn:active { transform: scale(0.98); }
+
+    /* ── PHOTO ── */
+    .photo-section {
+      width: 100%;
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    .photo-frame {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(184,132,42,0.2);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .photo-caption {
+      text-align: center;
+      margin-top: 16px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* ── RSVP ── */
+    .rsvp-section {
+      background: var(--cream-dark);
+      padding: 56px 24px 64px;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 8vw, 40px);
+      font-style: italic;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .section-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    .form-wrapper {
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--cream);
+      border-radius: 12px;
+      border: 0.5px solid rgba(184,132,42,0.25);
+      overflow: hidden;
+    }
+
+    .form-wrapper iframe {
+      width: 100%;
+      min-height: 480px;
+      border: none;
+      display: block;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      border-top: 0.5px solid rgba(184,132,42,0.2);
+    }
+
+    footer span {
+      color: var(--gold);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 480px) {
+      .hero { padding: 48px 20px 32px; }
+      .rsvp-btn { padding: 13px 32px; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="badge">Selamat Hari Raya Aidilfitri 1446H</div>
+
+    <h1 class="hero-name">The [Family]<br>Family</h1>
+
+    <p class="hero-sub">warmly invites you to our open house</p>
+
+    <div class="divider"></div>
+
+    <div class="hero-details">
+      <p class="date">Sunday, 6 April 2025</p>
+      <p>11.00am – 5.00pm</p>
+      <p style="margin-top: 6px;">123, Jalan Example,<br>Petaling Jaya, Selangor</p>
+    </div>
+
+    <a href="#rsvp" class="rsvp-btn">RSVP Now</a>
+  </section>
+
+  <!-- PHOTO SECTION -->
+  <div class="photo-section">
+    <div class="photo-frame">
+      <img src="family.jpg" alt="The [Family] Family" />
+    </div>
+    <p class="photo-caption">With love, from our home to yours</p>
+  </div>
+
+  <!-- RSVP SECTION -->
+  <section class="rsvp-section" id="rsvp">
+    <p class="section-label">Kindly respond by 30 March</p>
+    <h2 class="section-title">Will you be joining us?</h2>
+    <p class="section-note">Takes less than a minute — we'd love to know you're coming.</p>
+
+    <div class="form-wrapper">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSezDdXs8cwidX8ShFlCxdogHmmNVy1Vz5aNPoq5wKwleCDq8A/viewform?embedded=true"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        title="RSVP Form">
+        Loading…
+      </iframe>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Made with <span>♥</span> — The [Family] Family · Raya 2025</p>
+  </footer>
+
+</body>
+</html>
